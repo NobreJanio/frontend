@@ -1,0 +1,244 @@
+{
+  "products": [
+    {
+      "_id": "1",
+      "name": "Camiseta Básica Masculina",
+      "description": "Camiseta confortável de algodão.",
+      "price": 5000,
+      "category": "men",
+      "imageUrl": "images/1.jpeg"
+    },
+    {
+      "_id": "4",
+      "name": "Camisa Polo Masculina",
+      "description": "Camisa polo de algodão, ideal para o dia a dia.",
+      "price": 7000,
+      "category": "men",
+      "imageUrl": "images/4.jpeg"
+    },
+    {
+      "_id": "5",
+      "name": "Bermuda Masculina",
+      "description": "Bermuda confortável para o verão.",
+      "price": 6000,
+      "category": "men",
+      "imageUrl": "images/5.jpeg"
+    },
+    {
+      "_id": "6",
+      "name": "Jaqueta de Couro Masculina",
+      "description": "Jaqueta de couro estilosa e durável.",
+      "price": 25000,
+      "category": "men",
+      "imageUrl": "images/6.jpeg"
+    },
+    {
+      "_id": "7",
+      "name": "Tênis Casual Masculino",
+      "description": "Tênis confortável para uso diário.",
+      "price": 15000,
+      "category": "men",
+      "imageUrl": "images/7.jpeg"
+    },
+    {
+      "_id": "8",
+      "name": "Cinto de Couro Masculino",
+      "description": "Cinto de couro elegante e durável.",
+      "price": 4000,
+      "category": "men",
+      "imageUrl": "images/8.jpeg"
+    },
+    {
+      "_id": "9",
+      "name": "Moletom Masculino",
+      "description": "Moletom quentinho para os dias frios.",
+      "price": 9000,
+      "category": "men",
+      "imageUrl": "images/9.jpeg"
+    },
+    {
+      "_id": "10",
+      "name": "Camisa de Manga Longa Masculina",
+      "description": "Camisa de manga longa, perfeita para o trabalho.",
+      "price": 12000,
+      "category": "men",
+      "imageUrl": "images/10.jpeg"
+    },
+    {
+      "_id": "11",
+      "name": "Sunga Masculina",
+      "description": "Sunga confortável para a praia.",
+      "price": 3000,
+      "category": "men",
+      "imageUrl": "images/11.jpeg"
+    },
+    {
+      "_id": "12",
+      "name": "Chapéu Masculino",
+      "description": "Chapéu estiloso para proteção solar.",
+      "price": 5000,
+      "category": "men",
+      "imageUrl": "images/12.jpeg"
+    },
+    {
+      "_id": "2",
+      "name": "Calça Jeans Feminina",
+      "description": "Calça jeans de alta qualidade.",
+      "price": 12000,
+      "category": "women",
+      "imageUrl": "images/13.jpeg"
+    },
+    {
+      "_id": "13",
+      "name": "Blusa de Manga Curta Feminina",
+      "description": "Blusa leve e confortável para o verão.",
+      "price": 7000,
+      "category": "women",
+      "imageUrl": "images/14.jpeg"
+    },
+    {
+      "_id": "14",
+      "name": "Saia Midi Feminina",
+      "description": "Saia midi elegante para diversas ocasiões.",
+      "price": 15000,
+      "category": "women",
+      "imageUrl": "images/15.jpeg"
+    },
+    {
+      "_id": "15",
+      "name": "Vestido Floral Feminino",
+      "description": "Vestido floral perfeito para o verão.",
+      "price": 18000,
+      "category": "women",
+      "imageUrl": "images/16.jpeg"
+    },
+    {
+      "_id": "16",
+      "name": "Sandália Feminina",
+      "description": "Sandália confortável para o dia a dia.",
+      "price": 12000,
+      "category": "women",
+      "imageUrl": "images/17.jpeg"
+    },
+    {
+      "_id": "17",
+      "name": "Jaqueta Jeans Feminina",
+      "description": "Jaqueta jeans clássica e atemporal.",
+      "price": 16000,
+      "category": "women",
+      "imageUrl": "images/18.jpeg"
+    },
+    {
+      "_id": "18",
+      "name": "Camiseta Estampada Feminina",
+      "description": "Camiseta com estampa divertida.",
+      "price": 5000,
+      "category": "women",
+      "imageUrl": "images/19.jpeg"
+    },
+    {
+      "_id": "19",
+      "name": "Cinto Feminino",
+      "description": "Cinto elegante para completar o look.",
+      "price": 4000,
+      "category": "women",
+      "imageUrl": "images/20.jpeg"
+    },
+    {
+      "_id": "20",
+      "name": "Moletom Feminino",
+      "description": "Moletom quentinho para os dias frios.",
+      "price": 9000,
+      "category": "women",
+      "imageUrl": "images/21.jpeg"
+    },
+    {
+      "_id": "21",
+      "name": "Bolsa Tote Feminina",
+      "description": "Bolsa tote espaçosa e prática.",
+      "price": 20000,
+      "category": "women",
+      "imageUrl": "images/22.jpeg"
+    },
+    {
+      "_id": "3",
+      "name": "Jaqueta Infantil",
+      "description": "Jaqueta para crianças, leve e estilosa.",
+      "price": 8000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "22",
+      "name": "Camiseta Infantil",
+      "description": "Camiseta divertida para crianças.",
+      "price": 4000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "23",
+      "name": "Calça Infantil",
+      "description": "Calça confortável para o dia a dia.",
+      "price": 6000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "24",
+      "name": "Vestido Infantil",
+      "description": "Vestido colorido e alegre para meninas.",
+      "price": 10000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "25",
+      "name": "Tênis Infantil",
+      "description": "Tênis confortável para brincar.",
+      "price": 7000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "26",
+      "name": "Bermuda Infantil",
+      "description": "Bermuda leve e arejada para o verão.",
+      "price": 5000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "27",
+      "name": "Moletom Infantil",
+      "description": "Moletom quentinho para os dias frios.",
+      "price": 9000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "28",
+      "name": "Boné Infantil",
+      "description": "Boné divertido para proteção solar.",
+      "price": 3000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "29",
+      "name": "Meia Infantil",
+      "description": "Meia colorida e divertida.",
+      "price": 2000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    },
+    {
+      "_id": "30",
+      "name": "Jaqueta de Inverno Infantil",
+      "description": "Jaqueta de inverno quente e aconchegante.",
+      "price": 15000,
+      "category": "kids",
+      "imageUrl": "images/23.jpeg"
+    }
+  ]
+}
