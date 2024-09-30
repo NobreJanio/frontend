@@ -2,9 +2,10 @@
   <div class="home">
     <div class="featured-products">
       <h2>Masculino</h2>
+
       <div class="featured-list">
-        <ProductCard v-for="product in limitedFeaturedProducts" :key="product._id" :productId="product._id"
-          :product="product" @add-to-cart="addToCart" />
+        <ProductCard v-for="product in displayProducts" :key="product._id" :productId="product._id" :product="product"
+          @add-to-cart="addToCart" />
       </div>
     </div>
   </div>
@@ -16,24 +17,31 @@ import products from "../data/products.json";
 
 export default {
   components: {
-    ProductCard,
+    ProductCard
   },
+  props: ['searchQuery'], // Recebe a prop do componente pai
   data() {
     return {
       allProducts: products.products,
     };
   },
   computed: {
-    limitedFeaturedProducts() {
-      // Filtrar apenas produtos da categoria "men"
-      return this.allProducts.filter(product => product.category === 'men');
-    },
+    displayProducts() {
+      let productsToShow = this.searchQuery
+        ? this.allProducts.filter(product =>
+          product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          product.description.toLowerCase().includes(this.searchQuery.toLowerCase())
+        )
+        : this.allProducts;
+
+      return productsToShow.filter(product => product.category === 'men');
+    }
   },
   methods: {
     addToCart(product) {
       this.$store.dispatch('addToCart', product);
-    },
-  },
+    }
+  }
 };
 </script>
 

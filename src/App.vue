@@ -2,20 +2,16 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link>
+      <input type="text" v-model="searchQuery" placeholder="Buscar..." class="search-input">
       <router-link to="/categories/men">Masculinos</router-link>
       <router-link to="/categories/women">Femininos</router-link>
       <router-link to="/categories/kids">Infantis</router-link>
       <router-link to="/cart">Carrinho ({{ cartCount }})</router-link>
     </nav>
 
-    <!-- Campo de busca -->
-    <div class="search-container">
-      <input type="text" placeholder="Buscar produtos..." v-model="searchQuery" @input="debouncedFilterProducts" />
-    </div>
+    <router-view :searchQuery="searchQuery" />
 
-    <router-view />
     <div id="footer" class="fixed-footer">
-      <!-- footer content here -->
       &copy; 2024 Dev JanioJunior
     </div>
   </div>
@@ -23,40 +19,43 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import productsData from './data/products.json'; // Importa os dados dos produtos
-
+import { debounce } from 'lodash'; // Importa a função debounce
+import productsData from './data/products.json'; // Assuming this is your product data
+import ProductCard from './components/ProductCard.vue';
 
 export default {
-
+  components: {
+    ProductCard
+  },
   data() {
     return {
-      searchQuery: '', // Armazena a consulta de busca
-      products: productsData.products, // Armazena todos os produtos
-      filteredProducts: [], // Armazena os produtos filtrados
+      allProducts: productsData,
+      searchQuery: '',
     };
   },
-
   computed: {
-    ...mapGetters(['cartItems']),
-    cartCount() {
-      return this.cartItems.reduce((total, item) => total + item.quantity, 0); // Conta o total de itens no carrinho
+    filteredProducts() {
+      const lowerQuery = this.searchQuery.toLowerCase();
+      // Filtra apenas pela busca, sem filtrar por categoria
+      return this.allProducts.filter(product =>
+        product.name.toLowerCase().includes(lowerQuery) ||
+        product.description.toLowerCase().includes(lowerQuery)
+      );
     },
   },
-
   methods: {
-    filterProducts() {
-      if (this.searchQuery) {
-        // Filtra os produtos com base na consulta
-        this.filteredProducts = this.products.filter(product =>
-          product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      } else {
-        this.filteredProducts = this.products; // Se a consulta estiver vazia, mostra todos os produtos
-      }
+    addToCart(product) {
+      this.$store.dispatch('addToCart', product);
     },
+    // Debounce the search to avoid excessive calls
+    debouncedSearch: debounce(function () {
+      // You can add any actions you want to perform on search here
+    }, 500),
   },
-  mounted() {
-    this.filteredProducts = this.products; // Inicializa com todos os produtos
+  watch: {
+    searchQuery() {
+      this.debouncedSearch();
+    },
   },
 };
 </script>
@@ -66,12 +65,12 @@ export default {
   background-image: url("/public/images/hero-background.jpg");
 }
 
-/* Estilos para o menu */
 nav {
   display: flex;
   justify-content: space-between;
   background-color: #333;
   padding: 10px;
+  align-items: center;
 }
 
 nav a {
@@ -84,20 +83,14 @@ nav a:hover {
   background-color: #444;
 }
 
-/* Estilos para o campo de busca */
-.search-container {
-  padding: 10px;
-}
-
-.search-container input {
-  width: 98%;
+.search-input {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 200px;
 }
 
 .fixed-footer {
-
   bottom: 0;
   left: 0;
   width: 100%;
