@@ -1,27 +1,43 @@
 <template>
-    <div>
-      <h2>Produtos Disponíveis</h2>
-      <ul>
-        <li v-for="product in products" :key="product._id">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-          <p>Preço: R$ {{ product.price / 100 }}</p>
-        </li>
-      </ul>
+  <div class="product-list">
+    <div v-if="products.length === 0">Nenhum produto encontrado.</div>
+    <div class="product" v-for="product in products" :key="product._id">
+      <img :src="product.imageUrl" :alt="product.name" />
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <p>Preço: R$ {{ (product.price / 100).toFixed(2) }}</p>
     </div>
-  </template>
-  
-  <script>
-  import { fetchProducts } from '../services/productService';
-  
-  export default {
-    data() {
-      return {
-        products: [],
-      };
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    products: {
+      type: Array,
+      required: true,
     },
-    async created() {
-      this.products = await fetchProducts();
-    },
-  };
-  </script>
+  },
+};
+</script>
+
+<style scoped>
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product {
+  width: 30%;
+  /* Ajuste conforme necessário */
+  margin: 1%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.product img {
+  max-width: 100%;
+  height: auto;
+}
+</style>

@@ -62,6 +62,7 @@ export default {
   transition: transform 0.2s;
   width: 250px;
   height: 280px;
+
 }
 
 .product-card:hover {
@@ -73,6 +74,7 @@ export default {
   height: 100px;
   object-fit: cover;
   border-radius: 10px;
+
 }
 
 .add-to-cart {

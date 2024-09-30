@@ -1,25 +1,92 @@
 <template>
   <div class="home">
-    <!-- Menu de navegação -->
-    <nav class="menu">
-      <ul>
-        <li><router-link to="/" exact>Home</router-link></li>
-        <li><router-link to="/categories/men">Masculinos</router-link></li>
-        <li><router-link to="/categories/women">Femininos</router-link></li>
-        <li><router-link to="/categories/kids">Infantis</router-link></li>
-        <li><router-link to="/contact">Contato</router-link></li>
-      </ul>
-    </nav>
+    <swiper :style="{
+      '--swiper-navigation-color': '#4CAF50',
+      '--swiper-pagination-color': '#4CAF50',
+    }" :slidesPerView="1" :spaceBetween="30" :loop="true" :parallax="true" :autoplay="{
+      delay: 2500,
+      disableOnInteraction: false,
+    }" :pagination="{
+      clickable: true,
+    }" :navigation="true" :modules="modules" class="mySwiper">
 
-    <div class="hero">
-      <h1>Bem-vindo ao E-commerce de Roupas</h1>
-      <p>Explore nossas categorias de produtos e encontre o que você ama!</p>
-    </div>
+      <div slot="container-start" class="parallax-bg" data-swiper-parallax="-23%"></div>
+      <swiper-slide :style="{
+        'background-image': 'url(/src/assets/images/banner-15.jpg)',
+        'background-size': 'cover',
+      }">
 
-    <!-- Produtos em Destaque -->
-    <div v-for="category in uniqueCategories" :key="category" class="featured-products">
+        <div class="title" data-swiper-parallax="-300">Slide 1</div>
+        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
+            laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
+            Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
+            Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
+            velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
+            libero. Aenean feugiat non eros quis feugiat.
+          </p>
+        </div>
+      </swiper-slide>
+
+      <swiper-slide :style="{
+        'background-image':
+          'url(/src/assets/images/banner-25.jpg)',
+        'background-size': 'cover',
+      }">
+
+        <div class="title" data-swiper-parallax="-300">Slide 1</div>
+        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
+            laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
+            Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
+            Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
+            velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
+            libero. Aenean feugiat non eros quis feugiat.
+          </p>
+        </div>
+      </swiper-slide>
+
+      <swiper-slide :style="{
+        'background-image':
+          'url(/src/assets/images/banner-29.jpg)',
+        'background-size': 'cover',
+      }">
+
+        <div class="title" data-swiper-parallax="-300">Slide 1</div>
+        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
+            laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
+            Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
+            Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
+            velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
+            libero. Aenean feugiat non eros quis feugiat.
+          </p>
+        </div>
+      </swiper-slide>
+
+      <template #container-end>
+        <div class="autoplay-progress">
+          <svg viewBox="0 0 48 48" ref="progressCircle">
+            <circle cx="24" cy="24" r="20"></circle>
+          </svg>
+          <span ref="progressContent"></span>
+        </div>
+      </template>
+    </swiper>
+
+    <div class="featured-products">
+      <h1>Produtos mais venvidos</h1>
       <div class="featured-list">
-        <ProductCard v-for="product in limitedFeaturedProducts(category)" :key="product._id" :productId="product._id"
+        <ProductCard v-for="product in limitedFeaturedProducts" :key="product._id" :productId="product._id"
           :product="product" @add-to-cart="addToCart" />
       </div>
     </div>
@@ -29,10 +96,19 @@
 <script>
 import ProductCard from "../components/ProductCard.vue";
 import products from "../data/products.json";
+import { ref } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Parallax, Autoplay, Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import './style.css';
 
 export default {
   components: {
     ProductCard,
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
@@ -40,19 +116,35 @@ export default {
     };
   },
   computed: {
-    // Obter categorias únicas dos produtos
-    uniqueCategories() {
-      const categories = new Set(this.allProducts.map(product => product.category));
-      return Array.from(categories);
+    limitedFeaturedProducts() {
+      const limitedProducts = [];
+      const categories = [...new Set(this.allProducts.map(product => product.category))];
+
+      categories.forEach(category => {
+        const productsInCategory = this.allProducts.filter(product => product.category === category);
+        limitedProducts.push(...productsInCategory.slice(0, 3)); // Adiciona até 2 produtos por categoria
+      });
+
+      return limitedProducts;
     },
   },
+
+  setup() {
+    const progressCircle = ref(null);
+    const progressContent = ref(null);
+    const onAutoplayTimeLeft = (s, time, progress) => {
+      progressCircle.value.style.setProperty('--progress', 1 - progress);
+      progressContent.value.textContent = `${Math.ceil(time / 1000)}s`;
+    };
+    return {
+      onAutoplayTimeLeft,
+      progressCircle,
+      progressContent,
+      modules: [Parallax, Autoplay, Pagination, Navigation],
+    };
+  },
+
   methods: {
-    // Método para limitar os produtos exibidos a dois por categoria
-    limitedFeaturedProducts(category) {
-      return this.allProducts
-        .filter(product => product.category === category)
-        .slice(0, 2); // Limitar a dois produtos
-    },
     addToCart(product) {
       this.$store.dispatch('addToCart', product);
     },
@@ -66,7 +158,6 @@ export default {
 <style scoped>
 .home {
   text-align: center;
-  background-image: url("../assets/images/hero-background.jpg");
   padding: 20px;
 }
 
@@ -86,32 +177,13 @@ p {
   font-size: 1.2em;
 }
 
-.menu {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+.mySwiper {
+  margin-bottom: 30px;
 }
 
-.menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.menu li {
-  margin: 0 10px;
-}
-
-.menu a {
-  color: rgb(71, 70, 70);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.menu a:hover {
-  color: #e64a19;
+img {
+  width: 100%;
+  height: auto;
 }
 
 .featured-products {
@@ -123,16 +195,85 @@ p {
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  border: 1px solid red;
-
 }
-
-
 
 .product-card {
   flex: 0 2 calc(25% - 1rem);
   /* Cada card ocupa 25% da largura, menos o espaçamento */
   max-width: 220px;
   /* Largura máxima para os cards */
+}
+
+.swiper {
+  width: 100%;
+  height: 635px;
+}
+
+.swiper-slide {
+  font-size: 18px;
+  color: black;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 200px 300px;
+
+  /* Center slide text vertically */
+  display: grid;
+  justify-content: left;
+  align-items: center;
+}
+
+
+.autoplay-progress {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--swiper-theme-color);
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 4px;
+  stroke: var(--swiper-theme-color);
+  fill: none;
+  stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
+}
+
+.parallax-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 130%;
+  height: 100%;
+
+}
+
+.swiper-slide .title {
+  font-size: 41px;
+  font-weight: 300;
+}
+
+.swiper-slide .subtitle {
+  font-size: 21px;
+}
+
+.swiper-slide .text {
+  font-size: 14px;
+  max-width: 400px;
+  line-height: 1.3;
 }
 </style>

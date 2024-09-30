@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "swiper": "^11.1.14",
     "vue": "^3.4.29",
     "vue-carousel": "^0.18.0",
