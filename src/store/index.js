@@ -44,6 +44,9 @@ const store = createStore({
         totalPrice(state) {
             return state.cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
         },
+        cartCount(state) {
+            return state.cart.reduce((total, item) => total + item.quantity, 0); // Soma a quantidade total de produtos
+        },
     },
 });
 

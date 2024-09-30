@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="featured-products">
-      <h2>Masculino</h2>
+      <h2 class="featured-title">Masculino</h2>
 
       <div class="featured-list">
         <ProductCard v-for="product in displayProducts" :key="product._id" :productId="product._id" :product="product"
@@ -46,6 +46,37 @@ export default {
 </script>
 
 <style scoped>
+.featured-title {
+  font-size: 28px;
+
+  font-weight: bold;
+
+  color: #2a5934;
+
+  text-align: center;
+
+  margin: 20px 0;
+
+  padding: 10px;
+
+  position: relative;
+}
+
+.featured-title::after {
+  content: '';
+
+  display: block;
+
+  width: 10%;
+
+  height: 2px;
+
+  background-color: #195e24;
+
+  margin: 10px auto 0;
+
+}
+
 .featured-products {
   margin-top: 40px;
 }
@@ -54,6 +85,6 @@ export default {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
 }
 </style>

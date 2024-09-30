@@ -67,6 +67,7 @@ export default {
 
 .product-card:hover {
   transform: scale(1.05);
+  border: #4CAF50 solid 2px;
 }
 
 .product-image {
@@ -74,7 +75,8 @@ export default {
   height: 100px;
   object-fit: cover;
   border-radius: 10px;
-
+  display: block;
+  margin: 0 auto;
 }
 
 .add-to-cart {

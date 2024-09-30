@@ -1,5 +1,18 @@
 <template>
   <div class="home">
+    <input type="text" v-model="searchQuery" placeholder="Buscar produtos..." class="search-input-home"
+      @input="onSearch" />
+
+    <!-- Exibe resultados da busca somente se houver uma busca -->
+    <div v-if="filteredProducts.length > 0" class="search-results">
+      <h2 class="featured-title">Resultados da Busca</h2>
+      <div class="featured-list">
+        <ProductCard v-for="product in filteredProducts" :key="product._id" :productId="product._id" :product="product"
+          @add-to-cart="addToCart" />
+      </div>
+    </div>
+
+    <!-- Swiper (banner) -->
     <swiper :style="{
       '--swiper-navigation-color': '#4CAF50',
       '--swiper-pagination-color': '#4CAF50',
@@ -16,17 +29,11 @@
         'background-size': 'cover',
       }">
 
-        <div class="title" data-swiper-parallax="-300">Slide 1</div>
-        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="title" data-swiper-parallax="-300">Não perca</div>
+        <div class="subtitle" data-swiper-parallax="-200">Decontão até</div>
         <div class="text" data-swiper-parallax="-100">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-            laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-            Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-            Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-            velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-            libero. Aenean feugiat non eros quis feugiat.
+            30%
           </p>
         </div>
       </swiper-slide>
@@ -37,17 +44,11 @@
         'background-size': 'cover',
       }">
 
-        <div class="title" data-swiper-parallax="-300">Slide 1</div>
-        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="title" data-swiper-parallax="-300">Não perca</div>
+        <div class="subtitle" data-swiper-parallax="-200">Decontão até</div>
         <div class="text" data-swiper-parallax="-100">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-            laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-            Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-            Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-            velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-            libero. Aenean feugiat non eros quis feugiat.
+            30%
           </p>
         </div>
       </swiper-slide>
@@ -58,17 +59,11 @@
         'background-size': 'cover',
       }">
 
-        <div class="title" data-swiper-parallax="-300">Slide 1</div>
-        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="title" data-swiper-parallax="-300">Não perca</div>
+        <div class="subtitle" data-swiper-parallax="-200">Decontão até</div>
         <div class="text" data-swiper-parallax="-100">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-            laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-            Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-            Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-            velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-            libero. Aenean feugiat non eros quis feugiat.
+            30%
           </p>
         </div>
       </swiper-slide>
@@ -84,7 +79,7 @@
     </swiper>
 
     <div class="featured-products">
-      <h1>Produtos mais venvidos</h1>
+      <h2 class="featured-title">Produtos mais vendidos</h2>
       <div class="featured-list">
         <ProductCard v-for="product in limitedFeaturedProducts" :key="product._id" :productId="product._id"
           :product="product" @add-to-cart="addToCart" />
@@ -110,9 +105,11 @@ export default {
     Swiper,
     SwiperSlide,
   },
+
   data() {
     return {
       allProducts: products.products,
+      searchQuery: '',
     };
   },
   computed: {
@@ -135,7 +132,7 @@ export default {
             product.description.toLowerCase().includes(this.searchQuery.toLowerCase());
         });
       } else {
-        return this.allProducts;
+        return [];
       }
     }
   },
@@ -159,6 +156,9 @@ export default {
     addToCart(product) {
       this.$store.dispatch('addToCart', product);
     },
+    onSearch() {
+      // adicionar lógica adicional aqui se necessário
+    }
   },
 };
 </script>
@@ -274,17 +274,66 @@ img {
 }
 
 .swiper-slide .title {
-  font-size: 41px;
+  font-size: 80px;
   font-weight: 300;
 }
 
 .swiper-slide .subtitle {
-  font-size: 21px;
+  font-size: 50px;
 }
 
 .swiper-slide .text {
-  font-size: 14px;
+  font-size: 120px;
   max-width: 400px;
-  line-height: 1.3;
+  line-height: 0.2;
+  color: red
+}
+
+.search-input-home {
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  width: 300px;
+  position: absolute;
+  /* Altera o posicionamento para absoluto */
+  top: 79px;
+  /* Ajuste a distância do topo conforme necessário */
+  left: 50%;
+  /* Centraliza horizontalmente */
+  transform: translateX(-50%);
+  /* Ajusta a posição para centralizar */
+  z-index: 10;
+  /* Garante que o input fique acima do nav */
+}
+
+.featured-title {
+  font-size: 28px;
+
+  font-weight: bold;
+
+  color: #2a5934;
+
+  text-align: center;
+
+  margin: 20px 0;
+
+  padding: 10px;
+
+  position: relative;
+}
+
+.featured-title::after {
+  content: '';
+
+  display: block;
+
+  width: 20%;
+
+  height: 2px;
+
+  background-color: #195e24;
+
+  margin: 10px auto 0;
+
 }
 </style>
