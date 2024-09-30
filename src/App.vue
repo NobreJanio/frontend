@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 #app {
-  background-image: url("/public/images/hero-background.jpg");
+  background-image: url("/images/hero-background.jpg");
 }
 
 nav {

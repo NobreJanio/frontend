@@ -127,6 +127,17 @@ export default {
 
       return limitedProducts;
     },
+
+    filteredProducts() {
+      if (this.searchQuery) {
+        return this.allProducts.filter(product => {
+          return product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+            product.description.toLowerCase().includes(this.searchQuery.toLowerCase());
+        });
+      } else {
+        return this.allProducts;
+      }
+    }
   },
 
   setup() {
