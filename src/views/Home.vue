@@ -217,7 +217,7 @@ img {
 
 .swiper {
   width: 100%;
-  height: 635px;
+  height: 600px;
 }
 
 .swiper-slide {
