@@ -3,7 +3,7 @@
     <h2 class="category-title">Produtos - {{ category | capitalize }}</h2>
     <div class="product-grid">
       <div class="product-card" v-for="product in products" :key="product._id">
-        <img :src="product.imageUrl" alt="Imagem do produto" class="product-image" />
+        <img :src="formatImagePath(product.imageUrl)" alt="Imagem do produto" class="product-image" />
         <div class="product-info">
           <h3>{{ product.name }}</h3>
           <p>{{ product.description }}</p>
@@ -18,6 +18,7 @@
 <script>
 import { fetchProductsByCategory } from '../services/productService';
 import { mapActions } from 'vuex';
+import { formatImagePath } from '../utils/imageUtils';
 
 export default {
   data() {
@@ -31,6 +32,7 @@ export default {
   },
   methods: {
     ...mapActions(['addToCart']),
+    formatImagePath,
   },
 };
 </script>

@@ -82,9 +82,23 @@ export default {
 }
 
 .featured-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+@media (max-width: 1200px) {
+  .featured-list {
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-list {
+    gap: 1rem;
+  }
 }
 </style>

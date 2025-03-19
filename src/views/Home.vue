@@ -8,7 +8,7 @@
       <h2 class="featured-title">Resultados da Busca</h2>
       <div class="featured-list">
         <ProductCard v-for="product in filteredProducts" :key="product._id" :productId="product._id" :product="product"
-          @add-to-cart="addToCart" />
+          @add-to-cart="addToCart" class="product-card" />
       </div>
     </div>
 
@@ -25,7 +25,7 @@
 
       <div slot="container-start" class="parallax-bg" data-swiper-parallax="-23%"></div>
       <swiper-slide :style="{
-        'background-image': 'url(/src/assets/images/banner-15.jpg)',
+        'background-image': `url(${bannerImage1})`,
         'background-size': 'cover',
       }">
 
@@ -40,7 +40,7 @@
 
       <swiper-slide :style="{
         'background-image':
-          'url(/src/assets/images/banner-25.jpg)',
+          `url(${bannerImage2})`,
         'background-size': 'cover',
       }">
 
@@ -55,7 +55,7 @@
 
       <swiper-slide :style="{
         'background-image':
-          'url(/src/assets/images/banner-29.jpg)',
+          `url(${bannerImage3})`,
         'background-size': 'cover',
       }">
 
@@ -98,6 +98,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+import bannerImage1 from '@/assets/images/banner-15.jpeg';
+import bannerImage2 from '@/assets/images/banner-25.jpeg';
+import bannerImage3 from '@/assets/images/banner-29.jpeg';
+
 
 export default {
   components: {
@@ -110,6 +114,9 @@ export default {
     return {
       allProducts: products.products,
       searchQuery: '',
+      bannerImage1,
+      bannerImage2,
+      bannerImage3,
     };
   },
   computed: {
@@ -205,19 +212,28 @@ img {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
-.product-card {
-  flex: 0 2 calc(25% - 1rem);
-  /* Cada card ocupa 25% da largura, menos o espaçamento */
-  max-width: 220px;
-  /* Largura máxima para os cards */
+@media (max-width: 1200px) {
+  .featured-list {
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-list {
+    gap: 1rem;
+  }
 }
 
 .swiper {
   width: 100%;
   height: 600px;
+  margin-top: -19px;
 }
 
 .swiper-slide {
@@ -290,22 +306,25 @@ img {
 }
 
 .search-input-home {
-  padding: 8px;
-  border: 1px solid #333;
-  border-radius: 10px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
   width: 300px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: absolute;
-  /* Altera o posicionamento para absoluto */
   top: 79px;
-  /* Ajuste a distância do topo conforme necessário */
   left: 50%;
-  /* Centraliza horizontalmente */
   transform: translateX(-50%);
-  /* Ajusta a posição para centralizar */
   z-index: 10;
-  /* Garante que o input fique acima do nav */
 }
 
+.search-input-home:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 1px 8px rgba(76, 175, 80, 0.3);
+}
 .featured-title {
   font-size: 28px;
 
@@ -335,5 +354,9 @@ img {
 
   margin: 10px auto 0;
 
+}
+
+.product-card {
+  margin-bottom: 20px;
 }
 </style>

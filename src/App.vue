@@ -68,7 +68,7 @@ export default {
 
 <style scoped>
 #app {
-  background-image: url("/images/hero-background.jpg");
+  background-image: url("/assets/images/hero-background.jpg");
 }
 
 .search-input {
@@ -97,52 +97,121 @@ export default {
 }
 
 nav {
-  background-color: #93e5a1;
-  padding: 8px;
+  background-color: #4CAF50;
+  padding: 15px;
   border-radius: 8px 8px 0 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .nav-2 {
+  background-color: #e8f5e9;
   border-radius: 0 0 8px 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  position: relative;
 }
 
 nav a {
   text-decoration: none;
-  color: #2a5934;
-  /* Tom de verde escuro */
-  font-size: 20px;
-  font-weight: 500;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
   padding: 10px 20px;
   border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 nav a:hover {
-  background-color: #8bc34a;
-  /* Verde mais claro ao passar o mouse */
-  color: white;
+  background-color: #66BB6A;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 nav a.active {
-  background-color: #4caf50;
-  /* Tom de verde para o link ativo */
+  background-color: #2E7D32;
   color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 nav a:not(.active):hover {
-  background-color: #81c784;
-  /* Verde intermediário no hover */
+  background-color: #66BB6A;
 }
 
 nav a:not(.active) {
   background-color: transparent;
 }
 
+.search-input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  width: 300px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.search-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 1px 8px rgba(76, 175, 80, 0.3);
+}
+
 .fale_conosco {
-  display: block;
-  margin-left: 80%;
+  margin-left: auto;
+  margin-right: 20px;
+  color: #2E7D32 !important;
+  font-weight: 500;
+  background-color: transparent;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.fale_conosco:hover {
+  background-color: #4CAF50;
+  color: white !important;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  nav a {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .nav-2 {
+    flex-direction: column;
+  }
+  
+  .search-input {
+    width: 90%;
+    margin: 10px auto;
+    position: static;
+  }
+  
+  .fale_conosco {
+    margin: 10px auto;
+  }
 }
 </style>
