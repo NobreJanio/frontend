@@ -63,7 +63,9 @@ export default {
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.3s ease, 
+              border 0.3s ease;
   width: 250px;
   height: 400px;
   display: flex;
@@ -71,13 +73,31 @@ export default {
   justify-content: space-between;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   border: #4CAF50 solid 2px;
   z-index: 2;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(46, 204, 113, 0) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.product-card:hover::before {
+  opacity: 1;
 }
 
 .product-card header {
@@ -119,11 +139,13 @@ export default {
   border-radius: 8px;
   display: block;
   margin: 0 auto;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .product-card:hover .product-image {
-  transform: scale(1.05);
+  transform: scale(1.08) translateY(-5px);
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.15));
 }
 
 .price {
@@ -140,15 +162,37 @@ export default {
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   width: 100%;
   font-weight: bold;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-to-cart::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
 }
 
 .add-to-cart:hover {
   background-image: linear-gradient(to right, #3e8e41, #2ECC71);
   transform: scale(1.03);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.add-to-cart:hover::before {
+  left: 100%;
+}
+
+.add-to-cart:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .not-found {
